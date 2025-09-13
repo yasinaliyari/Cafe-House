@@ -1,0 +1,34 @@
+# سیستم‌عامل‌ها
+.DS_Store
+Thumbs.db
+
+# پوشه‌های build یا output
+dist/
+build/
+out/
+
+# پوشه‌های dependency
+node_modules/
+bower_components/
+
+# فایل‌های محیط توسعه
+.env
+.env.local
+*.log
+
+# فایل‌های VSCode یا JetBrains
+.vscode/
+.idea/
+
+# کش مرورگر یا ابزارها
+.cache/
+.sass-cache/
+.npm/
+.pnpm-store/
+
+# فایل‌های موقتی
+*.tmp
+*.swp
+
+# گزارش تست‌ها
+coverage/
