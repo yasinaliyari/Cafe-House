@@ -222,6 +222,12 @@ ul {
 .tm-section { margin-bottom: 60px; }
 .tm-section-margin-bottom-0 { margin-bottom: 0; }
 
+.test{
+    display: flex;
+    align-items: center;
+    padding-left: 500px;
+}
+
 /* Welcome */
 .tm-welcome-section {
   background: #282726;
