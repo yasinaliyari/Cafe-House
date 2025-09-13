@@ -651,11 +651,7 @@ button.tm-more-button {
   display: block;
   outline: 0;
 }
-#google-map { 
-  height: 350px;
-  border: 3px solid #fff;
-  border-radius: 10px;
-}
+
 
 @media screen and (max-width: 991px) {
   .tm-welcome-content { margin-bottom: 250px; }
@@ -678,7 +674,6 @@ button.tm-more-button {
   .tm-special-container-lower .tm-special-item:last-child { margin-right: 0; }
   .tm-product { margin-left: 0; }
   .tm-daily-menu-img { margin-bottom: 30px; }
-  #google-map { margin-top: 50px; }
 }
 
 @media screen and (max-width: 767px) {
