@@ -1,10 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
 
-</body>
+    {% include "includes/head.html" %}
+
+    <body>
+        {% include 'includes/header.html' %}
+
+        {% block content %}{% endblock %}
+
+        {% include 'includes/footer.html' %}
+        {% include 'includes/script.html' %}
+
+    </body>
 </html>
