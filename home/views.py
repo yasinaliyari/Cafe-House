@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
 from home.forms import ContactUsForm
-from home.models import Slider, PopularItem
+from home.models import Slider, PopularItem, Special
 
 
 class ContactUsView(View):
@@ -23,8 +23,17 @@ class HomePageView(View):
     def get(self, request):
         sliders = Slider.objects.filter(is_active=True).order_by("-created_at")
         popular_items = PopularItem.objects.filter(is_active=True)
+
+        specials_left = Special.objects.filter(is_active=True, position="left")
+        specials_right = Special.objects.filter(is_active=True, position="right")
+
         return render(
             request,
             "home/home.html",
-            {"sliders": sliders, "popular_items": popular_items},
+            {
+                "sliders": sliders,
+                "popular_items": popular_items,
+                "specials_left": specials_left,
+                "specials_right": specials_right,
+            },
         )
