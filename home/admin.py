@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import ContactUs, Slider, PopularItem, Special
+from home.models import ContactUs, Slider, PopularItem, Special, MenuItem
 
 
 @admin.register(ContactUs)
@@ -28,3 +28,10 @@ class SpecialAdmin(admin.ModelAdmin):
     list_display = ("title", "is_active", "created_at")
     list_filter = ("is_active", "created_at")
     search_fields = ["title", "description"]
+
+
+@admin.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ("title", "category", "price", "is_active", "created_at")
+    list_filter = ("category", "is_active")
+    search_fields = ("title", "description")
