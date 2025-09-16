@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
 from home.forms import ContactUsForm
+from home.models import Slider
 
 
 class ContactUsView(View):
@@ -20,4 +21,5 @@ class ContactUsView(View):
 
 class HomePageView(View):
     def get(self, request):
-        return render(request, "home/home.html")
+        sliders = Slider.objects.filter(is_active=True).order_by("-created_at")
+        return render(request, "home/home.html", {"sliders": sliders})
