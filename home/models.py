@@ -32,3 +32,18 @@ class Slider(models.Model):
     class Meta:
         verbose_name = "Slider Form"
         verbose_name_plural = "Slider Forms"
+
+
+class PopularItem(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=255)
+    image = models.ImageField(upload_to="popular_item")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Popular Item Form"
+        verbose_name_plural = "Popular Item Forms"
