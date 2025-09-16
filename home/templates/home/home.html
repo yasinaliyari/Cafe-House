@@ -36,26 +36,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <div class="tm-popular-item">
-                        <img src="{% static 'img/popular-2.jpg' %}" alt="Popular" class="tm-popular-item-img">
-                        <div class="tm-popular-item-description">
-                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter">c</span>appuccino</h3><hr class="tm-popular-item-hr">
-                            <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque. sed ipsum.</p>
-                            <div class="order-now-container">
-                                <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tm-popular-item">
-                        <img src="{% static 'img/popular-3.jpg' %}" alt="Popular" class="tm-popular-item-img">
-                        <div class="tm-popular-item-description">
-                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter">m</span>ocha</h3><hr class="tm-popular-item-hr">
-                            <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque. sed ipsum.</p>
-                            <div class="order-now-container">
-                                <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
             <section class="tm-section row">
@@ -64,55 +44,35 @@
                     <div class="tm-hr-container"><hr class="tm-hr"></div>
                 </div>
                 <div class="col-lg-12 tm-special-container margin-top-60">
-                    <div class="tm-special-container-left"> <!-- left -->
-                        <div class="tm-special-item">
-                            <div class="tm-special-img-container">
-                                <img src="{% static 'img/special-1.jpg' %}" alt="Special" class="tm-special-img img-responsive">
-                                <a href="#">
-                                    <div class="tm-special-description">
-                                        <h3 class="tm-special-title">Donec pede justo</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </a>
+                    <div class="tm-special-container-left">
+                        {% for special in specials_left %}
+                            <div class="tm-special-item">
+                                <div class="tm-special-img-container">
+                                    <img src="{{ special.image.url }}" alt="{{ special.title }}" class="tm-special-img img-responsive">
+                                    <a href="#">
+                                        <div class="tm-special-description">
+                                            <h3 class="tm-special-title">{{ special.title}}</h3>
+                                            <p>{{ special.description}}</p>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="tm-special-container-right"> <!-- right -->
-                        <div>
+                    <div class="tm-special-container-right">
+                        {% for special in specials_right %}
                             <div class="tm-special-item">
                                 <div class="tm-special-img-container">
-                                    <img src="{% static 'img/special-2.jpg' %}" alt="Special" class="img-responsive">
+                                    <img src="{{ special.image.url }}" alt="{{ special.title }}" class="img-responsive">
                                     <a href="#">
                                         <div class="tm-special-description">
-                                            <h3 class="tm-special-title">Etiam sit amet</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                            <h3 class="tm-special-title">{{ special.title}}</h3>
+                                            <p>{{ special.description }}</p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tm-special-container-lower">
-                            <div class="tm-special-item">
-                                <div class="tm-special-img-container">
-                                    <img src="{% static 'img/special-3.jpg' %}" alt="Special" class="img-responsive">
-                                    <a href="#">
-                                        <div class="tm-special-description">
-                                            <p>Vivamus elementum</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="tm-special-item">
-                                <div class="tm-special-img-container">
-                                    <img src="{% static 'img/special-4.jpg' %}" alt="Special" class="img-responsive">
-                                    <a href="#">
-                                        <div class="tm-special-description">
-                                            <p>Quisque rutrum.</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>
