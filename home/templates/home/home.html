@@ -24,16 +24,18 @@
                     <div class="tm-hr-container"><hr class="tm-hr"></div>
                 </div>
                 <div class="col-lg-12 tm-popular-items-container">
-                    <div class="tm-popular-item">
-                        <img src="{% static 'img/popular-1.jpg' %}" alt="Popular" class="tm-popular-item-img">
-                        <div class="tm-popular-item-description">
-                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter">a</span>mericano</h3><hr class="tm-popular-item-hr">
-                            <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque. sed ipsum.</p>
-                            <div class="order-now-container">
-                                <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
+                    {% for item in popular_items %}
+                        <div class="tm-popular-item">
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="tm-popular-item-img">
+                            <div class="tm-popular-item-description">
+                                <h3 class="tm-handwriting-font tm-popular-item-title">{{ item.title }}</h3><hr class="tm-popular-item-hr">
+                                <p>{{ item.description }}</p>
+                                <div class="order-now-container">
+                                    <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                     <div class="tm-popular-item">
                         <img src="{% static 'img/popular-2.jpg' %}" alt="Popular" class="tm-popular-item-img">
                         <div class="tm-popular-item-description">
