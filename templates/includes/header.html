@@ -23,8 +23,8 @@
                         <li><a href="today-special.html">Today Special</a></li>
                         <li><a href="{% url 'menu' %}" class="{% if request.resolver_match.url_name == 'menu' %} active {% endif %} ">Menu</a></li>
                         <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="login.html">Login</a></li>
+                        <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %} active {% endif %}">Register</a></li>
+                        <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %} active {% endif %}">Login</a></li>
                     </ul>
                 </nav>
             </div>
