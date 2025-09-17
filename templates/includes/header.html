@@ -21,7 +21,7 @@
                     <ul>
                         <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %} active {% endif %}">Home</a></li>
                         <li><a href="today-special.html">Today Special</a></li>
-                        <li><a href="{% url 'menu' %}" class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %} ">Menu</a></li>
+                        <li><a href="{% url 'menu' %}" class="{% if request.resolver_match.url_name == 'menu' %} active {% endif %} ">Menu</a></li>
                         <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a></li>
                         <li><a href="register.html">Register</a></li>
                         <li><a href="login.html">Login</a></li>
