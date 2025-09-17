@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import menu_page
+from menu.views import MenuPageView
 
 urlpatterns = [
-    path("", menu_page, name="menu"),
+    path("", MenuPageView.as_view(), name="menu"),
 ]
