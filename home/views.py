@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
 from home.forms import ContactUsForm
-from home.models import Slider, PopularItem, Special, MenuItem
+from home.models import Slider, PopularItem, Special
+from menu.models import MenuItem
 
 
 class ContactUsView(View):
