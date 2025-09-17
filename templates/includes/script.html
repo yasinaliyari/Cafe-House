@@ -2,3 +2,31 @@
 <!-- JS -->
 <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>      <!-- jQuery -->
 <script type="text/javascript" src="{% static 'js/templatemo-script.js' %}"></script>      <!-- Templatemo Script -->
+
+<script>
+  $(document).ready(function () {
+
+    // ✅ وقتی روی لینک کلیک شد
+    $('.tm-side-menu a').on('click', function () {
+      $('.tm-side-menu a').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    // ✅ وقتی اسکرول می‌کنیم
+    $(window).on('scroll', function () {
+      var scrollPos = $(document).scrollTop();
+
+      $('.tm-side-menu a').each(function () {
+        var sectionId = $(this).attr('href');
+        if ($(sectionId).length) {
+          var sectionTop = $(sectionId).offset().top - 150; // فاصله از بالا
+          if (scrollPos >= sectionTop) {
+            $('.tm-side-menu a').removeClass('active');
+            $(this).addClass('active');
+          }
+        }
+      });
+    });
+
+  });
+</script>
