@@ -16,3 +16,12 @@ class RegisterForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs["class"] = "form-control"
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(
+            attrs={"class": "form-control", "placeholder": "Enter your email"}
+        ),
+    )
