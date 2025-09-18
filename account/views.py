@@ -1,15 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth import login
-from django.contrib.auth.views import (
-    LoginView,
-    LogoutView,
-    PasswordResetView,
-    PasswordResetDoneView,
-    PasswordResetConfirmView,
-    PasswordResetCompleteView,
-)
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-from account.forms import RegisterForm
+from account.forms import RegisterForm, PasswordResetRequestForm
+from account.models import PasswordResetCode
 
 
 class RegisterView(FormView):
@@ -23,28 +19,20 @@ class RegisterView(FormView):
         return super().form_valid(form)
 
 
-class CustomLoginView(LoginView):
-    template_name = "account/login.html"
+class PasswordRestRequestView(FormView):
+    template_name = "account/password_reset_request.html"
+    form_class = PasswordResetRequestForm
 
-
-class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy("home")
-
-
-class CustomPasswordResetView(PasswordResetView):
-    template_name = "account/password_reset_form.html"
-    email_template_name = "account/password_reset_email.html"
-    success_url = reverse_lazy("password_reset_done")
-
-
-class CustomPasswordResetDoneView(PasswordResetDoneView):
-    template_name = "account/password_reset_done.html"
-
-
-class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    template_name = "account/password_reset_confirm.html"
-    success_url = reverse_lazy("password_reset_complete")
-
-
-class CustomPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = "account/password_reset_complete.html"
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        try:
+            user = User.objects.get(email=email)
+            reset_code = PasswordResetCode.objects.create(user=user)
+            return render(
+                self.request,
+                "account/password_reset_show_code.html",
+                {"code": reset_code.code, "user_id": user.id},
+            )
+        except User.DoesNotExist:
+            messages.error(self.request, "No account found with this email.")
+            return redirect("password_reset_request")
