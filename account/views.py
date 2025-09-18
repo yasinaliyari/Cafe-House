@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.views.generic import FormView, View
 from account.forms import RegisterForm, PasswordResetRequestForm, PasswordResetCodeForm
 from account.models import PasswordResetCode
 
@@ -54,3 +54,27 @@ class PasswordRestVerifyView(FormView):
         except PasswordResetCode.DoesNotExist:
             messages.error(self.request, "Invalid code.")
             return redirect("password_reset_request")
+
+
+class PasswordResetConfirmCustomView(View):
+    template_name = "account/password_reset_confirm_custom.html"
+
+    def get(self, request, user_id):
+        return render(request, self.template_name, {"user_id": user_id})
+
+    def post(self, request, user_id):
+        user = get_object_or_404(User, id=user_id)
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
+            return render(request, self.template_name, {"user_id": user_id})
+
+        user.set_password(password1)
+        user.save()
+        messages.success(
+            request, "Your password has been reset successfully. You can now log in."
+        )
+
+        return redirect("login")
