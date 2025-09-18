@@ -32,7 +32,7 @@
                                class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a>
                         </li>
                         {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }}</a></li>
+                            <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
                         {% else %}
                             <li><a href="{% url 'register' %}"
                                    class="{% if request.resolver_match.url_name == 'register' %} active {% endif %}">Register</a>
