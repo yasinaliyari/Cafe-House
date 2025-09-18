@@ -23,16 +23,14 @@
                         </div>
 
                         <!-- Submit -->
-                        <div class="form-group">
+                        <div class="form-group text-center">
                             <button class="tm-more-button" type="submit">Login</button>
                         </div>
 
                         <!-- Links -->
-                        <div class="form-group">
+                        <div class="form-group auth-actions-inline">
                             <a href="{% url 'register' %}" class="tm-more-button">Register Account</a>
-                        </div>
-                        <div class="form-group">
-                            <a href="{% url 'password_reset' %}" class="tm-more-button">Forgot Password?</a>
+                            <a href="{% url 'password_reset_request' %}" class="tm-more-button">Forgot Password?</a>
                         </div>
                     </div>
                 </form>
