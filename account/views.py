@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import FormView, View
@@ -19,7 +20,15 @@ class RegisterView(FormView):
         return super().form_valid(form)
 
 
-class PasswordRestRequestView(FormView):
+class CustomLoginView(LoginView):
+    template_name = "account/login.html"
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy("home")
+
+
+class PasswordResetRequestView(FormView):
     template_name = "account/password_reset_request.html"
     form_class = PasswordResetRequestForm
 
@@ -38,7 +47,7 @@ class PasswordRestRequestView(FormView):
             return redirect("password_reset_request")
 
 
-class PasswordRestVerifyView(FormView):
+class PasswordResetVerifyView(FormView):
     template_name = "account/password_reset_verify.html"
     form_class = PasswordResetCodeForm
 
@@ -47,7 +56,7 @@ class PasswordRestVerifyView(FormView):
         user_id = self.request.POST.get("user_id")
         user = get_object_or_404(User, id=user_id)
         try:
-            reset_obj = PasswordResetCode.objects.filter(user=user, code=code).lastest(
+            reset_obj = PasswordResetCode.objects.filter(user=user, code=code).latest(
                 "created_at"
             )
             return redirect("password_reset_confirm_custom", user_id=user.id)
