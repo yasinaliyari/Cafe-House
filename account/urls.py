@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from account.views import (
     RegisterView,
     CustomLoginView,
@@ -28,5 +29,10 @@ urlpatterns = [
         "password_reset_confirm/<int:user_id>/",
         PasswordResetConfirmCustomView.as_view(),
         name="password_reset_confirm_custom",
+    ),
+    path(
+        "password_reset_complete/",
+        TemplateView.as_view(template_name="account/password_reset_complete.html"),
+        name="password_reset_complete",
     ),
 ]
