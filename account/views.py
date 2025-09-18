@@ -86,4 +86,4 @@ class PasswordResetConfirmCustomView(View):
             request, "Your password has been reset successfully. You can now log in."
         )
 
-        return redirect("login")
+        return redirect("password_reset_complete")
