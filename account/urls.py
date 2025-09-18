@@ -1,38 +1,32 @@
 from django.urls import path
-from account.views import RegisterView, LoginView, LogoutView
-from django.contrib.auth import views as auth_views
+from account.views import (
+    RegisterView,
+    CustomLoginView,
+    CustomLogoutView,
+    PasswordResetRequestView,
+    PasswordResetVerifyView,
+    PasswordResetConfirmCustomView,
+)
 
 urlpatterns = [
+    # Register / Login / Logout
     path("register/", RegisterView.as_view(), name="register"),
-    path("login/", LoginView.as_view(), name="login"),
-    path("logout/", LogoutView.as_view(), name="logout"),
-    # Password Reset
+    path("login/", CustomLoginView.as_view(), name="login"),
+    path("logout/", CustomLogoutView.as_view(), name="logout"),
+    # Password reset with 4-digit OTP
     path(
-        "password_reset/",
-        auth_views.PasswordResetView.as_view(
-            template_name="account/password_reset_form.html"
-        ),
-        name="password_reset",
+        "password_reset_request/",
+        PasswordResetRequestView.as_view(),
+        name="password_reset_request",
     ),
     path(
-        "password_reset/done/",
-        auth_views.PasswordResetDoneView.as_view(
-            template_name="account/password_reset_done.html"
-        ),
-        name="password_reset_done",
+        "password_reset_verify/",
+        PasswordResetVerifyView.as_view(),
+        name="password_reset_verify",
     ),
     path(
-        "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
-            template_name="account/password_reset_confirm.html"
-        ),
-        name="password_reset_confirm",
-    ),
-    path(
-        "reset/done/",
-        auth_views.PasswordResetCompleteView.as_view(
-            template_name="account/password_reset_complete.html"
-        ),
-        name="password_reset_complete",
+        "password_reset_confirm/<int:user_id>/",
+        PasswordResetConfirmCustomView.as_view(),
+        name="password_reset_confirm_custom",
     ),
 ]
