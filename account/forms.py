@@ -25,3 +25,13 @@ class PasswordResetRequestForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Enter your email"}
         ),
     )
+
+
+class PasswordResetCodeForm(forms.Form):
+    code = forms.CharField(
+        max_length=4,
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Enter 4-digit code"}
+        ),
+    )
