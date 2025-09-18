@@ -19,12 +19,28 @@
                 </div>
                 <nav class="tm-nav">
                     <ul>
-                        <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %} active {% endif %}">Home</a></li>
-                        <li><a href="today-special.html">Today Special</a></li>
-                        <li><a href="{% url 'menu' %}" class="{% if request.resolver_match.url_name == 'menu' %} active {% endif %} ">Menu</a></li>
-                        <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a></li>
-                        <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %} active {% endif %}">Register</a></li>
-                        <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %} active {% endif %}">Login</a></li>
+                        <li><a href="{% url 'home' %}"
+                               class="{% if request.resolver_match.url_name == 'home' %} active {% endif %}">Home</a>
+                        </li>
+{#                        <li><a href="{% url 'today_special' %}"#}
+{#                               class="{% if request.resolver_match.url_name == 'today_special' %} active {% endif %}">Today#}
+{#                            Special</a></li>#}
+                        <li><a href="{% url 'menu' %}"
+                               class="{% if request.resolver_match.url_name == 'menu' %} active {% endif %} ">Menu</a>
+                        </li>
+                        <li><a href="{% url 'contact' %}"
+                               class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'register' %}"
+                                   class="{% if request.resolver_match.url_name == 'register' %} active {% endif %}">Register</a>
+                            </li>
+                            <li><a href="{% url 'login' %}"
+                                   class="{% if request.resolver_match.url_name == 'login' %} active {% endif %}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -40,7 +56,7 @@
         </div>
         {% for slide in sliders %}
             <div class="row tm-welcome-content">
-                <h2 class="white-text tm-handwriting-font tm-welcome-header">{{ slide.title}}</h2>
+                <h2 class="white-text tm-handwriting-font tm-welcome-header">{{ slide.title }}</h2>
                 {% if slide.subtitle %}
                     <h2 class="gold-text tm-welcome-header-2">{{ slide.subtitle }}</h2>
                 {% endif %}
@@ -50,8 +66,8 @@
                 {% if slide.link %}
                     <a href="{{ slide.link }}" class="tm-more-button tm-more-button-welcome">Details</a>
                 {% endif %}
+                <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="tm-table-set img-responsive">
             </div>
-            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="tm-table-set img-responsive">
         {% endfor %}
     </div>
 </section>
