@@ -37,10 +37,12 @@ class PasswordResetRequestView(FormView):
         try:
             user = User.objects.get(email=email)
             reset_code = PasswordResetCode.objects.create(user=user)
+
+            self.request.session["reset_user_id"] = user.id
             return render(
                 self.request,
                 "account/password_reset_show_code.html",
-                {"code": reset_code.code, "user_id": user.id},
+                {"code": reset_code.code},
             )
         except User.DoesNotExist:
             messages.error(self.request, "No account found with this email.")
@@ -53,8 +55,13 @@ class PasswordResetVerifyView(FormView):
 
     def form_valid(self, form):
         code = form.cleaned_data["code"]
-        user_id = self.request.POST.get("user_id")
+        user_id = self.request.session.get("reset_user_id")
+        if not user_id:
+            messages.error(self.request, "Session expired. Please try again.")
+            return redirect("password_reset_request")
+
         user = get_object_or_404(User, id=user_id)
+
         try:
             reset_obj = PasswordResetCode.objects.filter(user=user, code=code).latest(
                 "created_at"
