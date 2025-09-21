@@ -22,9 +22,9 @@
                         <li><a href="{% url 'home' %}"
                                class="{% if request.resolver_match.url_name == 'home' %} active {% endif %}">Home</a>
                         </li>
-{#                        <li><a href="{% url 'today_special' %}"#}
-{#                               class="{% if request.resolver_match.url_name == 'today_special' %} active {% endif %}">Today#}
-{#                            Special</a></li>#}
+                        {#                        <li><a href="{% url 'today_special' %}"#}
+                        {#                               class="{% if request.resolver_match.url_name == 'today_special' %} active {% endif %}">Today#}
+                        {#                            Special</a></li>#}
                         <li><a href="{% url 'menu' %}"
                                class="{% if request.resolver_match.url_name == 'menu' %} active {% endif %} ">Menu</a>
                         </li>
@@ -32,7 +32,13 @@
                                class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">Contact</a>
                         </li>
                         {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
+                            <li>
+                                <a href="#" onclick="document.getElementById('logout-form').submit(); return false;">Logout
+                                    ({{ request.user.username }})</a>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                            </li>
                         {% else %}
                             <li><a href="{% url 'register' %}"
                                    class="{% if request.resolver_match.url_name == 'register' %} active {% endif %}">Register</a>

@@ -11,7 +11,7 @@ class MenuItem(models.Model):
 
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=255, null=True, blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.IntegerField()
     category = models.CharField(
         max_length=20, choices=CATEGORY_CHOICES, default="coffee_based"
     )

@@ -340,6 +340,8 @@ ul {
     color: #c79c60;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
 }
 
 .tm-more-button:hover,
@@ -487,9 +489,11 @@ ul {
 .tm-popular-item {
     background: url(../img/popular-item-bg.png) no-repeat;
     background-size: 100% 100%;
+    flex: 0 0 calc(33.333% - 30px);
     max-width: 294px;
     margin-top: 30px;
     margin-bottom: 80px;
+    box-sizing: border-box;
 }
 
 .tm-popular-item-img {
@@ -507,7 +511,8 @@ ul {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 30px;
     margin-bottom: 40px;
 }
 
@@ -599,10 +604,10 @@ ul {
 }
 
 .tm-special-item {
-    display: inline-block;
+    display: block;
     padding: 8px;
     background-color: white;
-    max-width: 100%;
+    width: 100%;
 }
 
 .tm-special-img-container {
@@ -640,7 +645,7 @@ ul {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
+    display: grid;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -650,6 +655,13 @@ ul {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    grid-template-columns: 1fr 1fr; /* دو ستون مساوی */
+    grid-template-rows: auto auto; /* دو ردیف */
+    gap: 15px;
+}
+
+.tm-special-container-right .tm-special-item:first-child {
+    grid-column: 1 / span 2; /* آیتم اول کل عرض رو بگیره */
 }
 
 .tm-special-container-lower {
@@ -717,6 +729,7 @@ ol li:before {
     z-index: 1;
     text-align: center;
     text-transform: uppercase;
+    margin-top: 60px;
 }
 
 .tm-side-menu-bg {
@@ -1042,5 +1055,43 @@ button.tm-more-button {
 .auth-actions-inline {
     display: flex;
     justify-content: center;
-    gap: 12px; /* فاصله بین دکمه‌ها */
+    gap: 12px;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-column .tm-more-button {
+    margin: 8px 0;
+}
+
+.form-center {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-center .form-control {
+    width: 100%;
+}
+
+.form-center .full-width {
+    width: 100%;
+    text-align: center;
+}
+
+.form-center button.tm-more-button {
+    display: block;
+    margin: 0 auto;
+}
+
+.tm-menu-product-content {
+    padding-left: 30px;
 }
